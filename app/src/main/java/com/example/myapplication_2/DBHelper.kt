@@ -10,13 +10,16 @@ data class RecipeModel(val id: Int, val dish: String, val ingredients: String, v
 class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
-        private const val DATABASE_NAME = "C:\\Users\\Serj\\AndroidStudioProjects\\MyApplication_22\\app\\src\\main\\java\\com\\example\\myapplication_2\\my_database2.db"
+        private const val DATABASE_NAME = "my_database"
         private const val DATABASE_VERSION = 1
     }
 
     override fun onCreate(db: SQLiteDatabase) {
+        val db = SQLiteDatabase.openOrCreateDatabase(
+            "/data/user/0/com.example.myapplication_2/databases/my_database.db", null
+        )
         val createTableQuery = """
-            CREATE TABLE IF NOT EXISTS RecipeTable (
+            CREATE TABLE IF NOT EXISTS my_table (
                 id INTEGER PRIMARY KEY,
                 dish TEXT,
                 ingredients TEXT,
@@ -39,7 +42,9 @@ class DatabaseHandler(private val context: Context) {
     @SuppressLint("Range")
     fun searchRecipesByIngredients(ingredientsList: List<String>): List<RecipeModel> {
 //        val db = SQLiteDatabase.openDatabase("com/example/myapplication_2/my_database.db", null, SQLiteDatabase.OPEN_READWRITE)
-        val db = dbHelper.readableDatabase
+        val db_path = context.getDatabasePath("my_database.db").path
+        val db = SQLiteDatabase.openDatabase(context.getDatabasePath("my_database.db").path, null, SQLiteDatabase.OPEN_READWRITE)
+//        val db = dbHelper.readableDatabase
         val matchingRecipes = mutableListOf<RecipeModel>()
 
         val selectionArgs = Array(ingredientsList.size) { "%" + ingredientsList[it] + "%" }
@@ -59,7 +64,7 @@ class DatabaseHandler(private val context: Context) {
         }
 
         cursor.close()
-        db.close()
+//        db.close()
         return matchingRecipes
     }
 }
