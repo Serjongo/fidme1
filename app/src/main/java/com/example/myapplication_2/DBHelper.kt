@@ -10,7 +10,7 @@ data class RecipeModel(val id: Int, val dish: String, val ingredients: String, v
 class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
-        private const val DATABASE_NAME = "C:\\Users\\Serj\\AndroidStudioProjects\\MyApplication_22\\app\\src\\main\\java\\com\\example\\myapplication_2\\my_database.db"
+        private const val DATABASE_NAME = "C:\\Users\\Serj\\AndroidStudioProjects\\MyApplication_22\\app\\src\\main\\java\\com\\example\\myapplication_2\\my_database2.db"
         private const val DATABASE_VERSION = 1
     }
 
