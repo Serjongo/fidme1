@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication_2.databinding.ActivityMainBinding
+import com.example.myapplication_2.DBHelper
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,6 +45,8 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+
+        val dbHandler = DatabaseHandler(this)
 
         checkBox = findViewById(R.id.checkBox)
         checkBox2 = findViewById(R.id.checkBox2)
@@ -76,8 +79,10 @@ class MainActivity : AppCompatActivity() {
                 result.append("\n Coffee 100 Rs")
                 totalAmount += 100
             }
-            result.append("\nTotal Price is:$totalAmount Rs")
-            textView.text = result.toString()
+            val ingredientsList = listOf("Salt", "Olive Oil", "Eggs")
+            val matchingRecipes = dbHandler.searchRecipesByIngredients(ingredientsList)
+//            result.append("\nTotal Price is:$totalAmount Rs")
+//            textView.text = result.toString()
         }
 
 
