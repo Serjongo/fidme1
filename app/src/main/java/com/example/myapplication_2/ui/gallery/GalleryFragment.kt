@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.myapplication_2.R
 import com.example.myapplication_2.databinding.FragmentGalleryBinding
 
 class GalleryFragment : Fragment() {
@@ -15,7 +17,9 @@ class GalleryFragment : Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
+//    private lateinit var recipes_button: Button
     private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,10 +28,8 @@ class GalleryFragment : Fragment() {
     ): View {
         val galleryViewModel =
             ViewModelProvider(this).get(GalleryViewModel::class.java)
-
         _binding = FragmentGalleryBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
         val textView: TextView = binding.textGallery
         galleryViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
